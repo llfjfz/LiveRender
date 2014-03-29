@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="game_server.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="server_init.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3d9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dcubetexture9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dindexbuffer9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dpixelshader9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dresource9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dstateblock9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dsurface9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dswapchain9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dtexture9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dvertexbuffer9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dvertexdeclaration9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dvertexshader9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dvolumetexture9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_device_trivial.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_device_nontrivial.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ymesh.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="wrap_direct3dvolume9.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="yslim.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="keyboard_hook.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InputServer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="game_server.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3d9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dcubetexture9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3ddevice9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dindexbuffer9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dpixelshader9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dresource9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dstateblock9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dsurface9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dswapchain9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dtexture9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dvertexbuffer9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dvertexdeclaration9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dvertexshader9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dvolumetexture9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ymesh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="wrap_direct3dvolume9.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="yslim.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="new_hash.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InputServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="game_server.def">
+      <Filter>源文件</Filter>
+    </None>
+  </ItemGroup>
+</Project>

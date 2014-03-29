@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "utility", "utility\utility.vcxproj", "{892E42DD-F512-49D5-A6B7-07C88D29BA96}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_client", "game_client\game_client.vcxproj", "{22E24899-0788-4ECF-940F-C441E4359811}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "game_server", "game_server\game_server.vcxproj", "{9AA91C9D-331A-40C1-932C-DC785F1B4867}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loader", "loader\loader.vcxproj", "{BA0AEF84-8938-495C-B35C-4F88C024059C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{892E42DD-F512-49D5-A6B7-07C88D29BA96}.Debug|Win32.ActiveCfg = Debug|Win32
+		{892E42DD-F512-49D5-A6B7-07C88D29BA96}.Debug|Win32.Build.0 = Debug|Win32
+		{892E42DD-F512-49D5-A6B7-07C88D29BA96}.Release|Win32.ActiveCfg = Release|Win32
+		{892E42DD-F512-49D5-A6B7-07C88D29BA96}.Release|Win32.Build.0 = Release|Win32
+		{22E24899-0788-4ECF-940F-C441E4359811}.Debug|Win32.ActiveCfg = Debug|Win32
+		{22E24899-0788-4ECF-940F-C441E4359811}.Debug|Win32.Build.0 = Debug|Win32
+		{22E24899-0788-4ECF-940F-C441E4359811}.Release|Win32.ActiveCfg = Release|Win32
+		{22E24899-0788-4ECF-940F-C441E4359811}.Release|Win32.Build.0 = Release|Win32
+		{9AA91C9D-331A-40C1-932C-DC785F1B4867}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9AA91C9D-331A-40C1-932C-DC785F1B4867}.Debug|Win32.Build.0 = Debug|Win32
+		{9AA91C9D-331A-40C1-932C-DC785F1B4867}.Release|Win32.ActiveCfg = Release|Win32
+		{9AA91C9D-331A-40C1-932C-DC785F1B4867}.Release|Win32.Build.0 = Release|Win32
+		{BA0AEF84-8938-495C-B35C-4F88C024059C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BA0AEF84-8938-495C-B35C-4F88C024059C}.Debug|Win32.Build.0 = Debug|Win32
+		{BA0AEF84-8938-495C-B35C-4F88C024059C}.Release|Win32.ActiveCfg = Release|Win32
+		{BA0AEF84-8938-495C-B35C-4F88C024059C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

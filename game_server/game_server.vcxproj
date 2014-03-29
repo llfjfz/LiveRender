@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9AA91C9D-331A-40C1-932C-DC785F1B4867}</ProjectGuid>
+    <RootNamespace>game_server</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ModuleDefinitionFile>game_server.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>C:\Program Files\Microsoft DirectX SDK (June 2010)\Include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;..\utility;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Program Files\Microsoft DirectX SDK (June 2010)\Lib\x86;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>game_server.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="game_server.cpp" />
+    <ClCompile Include="InputServer.cpp" />
+    <ClCompile Include="keyboard_hook.cpp" />
+    <ClCompile Include="server_init.cpp" />
+    <ClCompile Include="wrap_device_nontrivial.cpp" />
+    <ClCompile Include="wrap_direct3d9.cpp" />
+    <ClCompile Include="wrap_direct3dcubetexture9.cpp" />
+    <ClCompile Include="wrap_device_trivial.cpp" />
+    <ClCompile Include="wrap_direct3dindexbuffer9.cpp" />
+    <ClCompile Include="wrap_direct3dpixelshader9.cpp" />
+    <ClCompile Include="wrap_direct3dresource9.cpp" />
+    <ClCompile Include="wrap_direct3dstateblock9.cpp" />
+    <ClCompile Include="wrap_direct3dsurface9.cpp" />
+    <ClCompile Include="wrap_direct3dswapchain9.cpp" />
+    <ClCompile Include="wrap_direct3dtexture9.cpp" />
+    <ClCompile Include="wrap_direct3dvertexbuffer9.cpp" />
+    <ClCompile Include="wrap_direct3dvertexdeclaration9.cpp" />
+    <ClCompile Include="wrap_direct3dvertexshader9.cpp" />
+    <ClCompile Include="wrap_direct3dvolume9.cpp" />
+    <ClCompile Include="wrap_direct3dvolumetexture9.cpp" />
+    <ClCompile Include="ymesh.cpp" />
+    <ClCompile Include="yslim.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\utility\utility.vcxproj">
+      <Project>{892e42dd-f512-49d5-a6b7-07c88d29ba96}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="game_server.h" />
+    <ClInclude Include="InputServer.h" />
+    <ClInclude Include="matrix.h" />
+    <ClInclude Include="new_hash.hpp" />
+    <ClInclude Include="wrap_direct3d9.h" />
+    <ClInclude Include="wrap_direct3dcubetexture9.h" />
+    <ClInclude Include="wrap_direct3ddevice9.h" />
+    <ClInclude Include="wrap_direct3dindexbuffer9.h" />
+    <ClInclude Include="wrap_direct3dpixelshader9.h" />
+    <ClInclude Include="wrap_direct3dresource9.h" />
+    <ClInclude Include="wrap_direct3dstateblock9.h" />
+    <ClInclude Include="wrap_direct3dsurface9.h" />
+    <ClInclude Include="wrap_direct3dswapchain9.h" />
+    <ClInclude Include="wrap_direct3dtexture9.h" />
+    <ClInclude Include="wrap_direct3dvertexbuffer9.h" />
+    <ClInclude Include="wrap_direct3dvertexdeclaration9.h" />
+    <ClInclude Include="wrap_direct3dvertexshader9.h" />
+    <ClInclude Include="wrap_direct3dvolume9.h" />
+    <ClInclude Include="wrap_direct3dvolumetexture9.h" />
+    <ClInclude Include="ymesh.h" />
+    <ClInclude Include="yslim.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="game_server.def" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

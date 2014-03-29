@@ -1,0 +1,3 @@
+LIBRARY game_server.dll
+EXPORTS
+	StartHook
