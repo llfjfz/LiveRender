@@ -45,6 +45,7 @@ inline double YSlim::vertex_error(Matrix q, double x, double y, double z) {
 		+ 2*q[6]*y*z + 2*q[7]*y + q[10]*z*z + 2*q[11]*z + q[15];
 }
 
+//Init the quadric error of v
 void YSlim::init_quadrics() {
 	quadrics.clear();
 	for(int i=0; i<vertices.size(); ++i) {
@@ -85,6 +86,7 @@ void YSlim::add_edge_face(int v1, int v2, int f) {
 	it = ed_faces_mp_.find(make_pair(v1, v2));
 
 	if(it == ed_faces_mp_.end()) {
+		// This edge owned by one face
 		ed_faces_mp_.insert(make_pair(make_pair(v1, v2), f));
 	}
 	else {
@@ -113,6 +115,7 @@ bool YSlim::is_border(int v1, int v2) {
 		return false;
 }
 
+//select the vertex pair at the head of queue
 void YSlim::select_pair() {
 	
 	for(int i=0; i<adj.size(); ++i) {
@@ -188,6 +191,8 @@ double YSlim::calculate_error(int id_v1, int id_v2, double* vx/* =0 */, double* 
  * that gets all the data.
  *
  * file  - (fopen'd) file descriptor 
+ *
+ *Using for testing, not active in current version
 */
 void YSlim::parse(FILE* file) {
 	char ch;
