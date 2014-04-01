@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
 	char RecvB[100];
 
 	if(argc == 2 || argc == 3) {
-		//启动游戏进程
+		//Load game process
 		DWORD id = GetCurrentProcessId();
 
 		int dump_mesh = 0;
@@ -70,7 +70,7 @@ int main(int argc, char** argv) {
 		printf("Appname: %s\n", AppName.c_str());
 
 
-		//启动游戏进程
+		//Load game process
 		DWORD id = GetCurrentProcessId();
 		sprintf(cmdLine,"%s %d %d %d %d",AppName.c_str(), 0, cs.get_connect_socket(), dis.get_connect_socket(), id);
 		printf("cmd line is %s\n", cmdLine);
