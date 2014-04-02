@@ -5,7 +5,9 @@ LiveRender is an open source cloud gaming system.
 Set up
 ------
 Prerequisites
+--------------
 Microsoft Visual Studio (c++) 2010
+
 DirectX SDK 9.0 c (Recommended: DXSDK_Jun10 version, the version released in June 2010)
 
 Build
@@ -20,7 +22,10 @@ Selecting game_client project, "Properties"-->"Configuration Properties" --> "C/
 Adding linker library:
 
 Selecting game_client project, "Properties"-->"Configuration Properties" --> "Linker" --> "General Additional Library Directories", add "DirectX SDK Directory\Lib\x86"(target to 32bit program). The same for game_server.
-Configuration Type. "Properties"-->"Configuration Properties" --> "General" --> "Configuration Type". Select .exe for game_client and loader, and .dll for game_server.
+
+Configuration Type. 
+
+"Properties"-->"Configuration Properties" --> "General" --> "Configuration Type". Select .exe for game_client and loader, and .dll for game_server.
 
 Quick Start
 -----------
