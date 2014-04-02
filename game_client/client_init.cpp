@@ -2,6 +2,9 @@
 #include "game_client.h"
 #define SDL_WINDOW
 
+//
+//Initialize client window, dispatch messages
+
 HWND hWnd = NULL;
 void DestroyD3DWindow() {
 	printf("Destroying D3D window...\n");
@@ -68,7 +71,8 @@ HRESULT client_init() {
 	if(FAILED(g_d3d->GetAdapterDisplayMode(D3DADAPTER_DEFAULT, &displayMode))) return false;
 
 	/////////////////////////////////////////////
-	//read data
+	//Read data from WrapperDirect3D9::CreateDevice operation
+	//Take the object instance as object id, begin from 0
 	int id = cc.read_int();
 	UINT Adapter = cc.read_uint();
 	D3DDEVTYPE DeviceType = (D3DDEVTYPE)(cc.read_uint());

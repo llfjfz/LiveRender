@@ -395,7 +395,7 @@ bool capture_thread_running = true;
 bool main_thread_running = true;
 
 DWORD WINAPI InputUploadThread(LPVOID lpParameter){
-	// the thread send the input data to server
+	// The thread send the input data to server
 	//UnstructuredNet * dis = (UnstructuredNet *)lpParameter;
 	CommonNet * dis = (CommonNet *)lpParameter;
 	int wlen;
@@ -412,10 +412,10 @@ DWORD WINAPI InputUploadThread(LPVOID lpParameter){
 			if(!dis){
 				//Log::log("dis NULL\n");
 			}
-			// send data
+			// Send data
 			dis->write_byte_arr((char *)qm->msg, qm->msgsize);
 
-			// check the input
+			// Check the input
 			struct sdlmsg * mms =(struct sdlmsg *)qm->msg;
 
 			buf_msg_size += qm->msgsize;
