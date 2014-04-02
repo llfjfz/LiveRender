@@ -2,15 +2,15 @@ LiveRender
 ==========
 LiveRender is an open source cloud gaming system.
 
-Set up
-------
-##Prerequisites
+##Set up
+
+###Prerequisites
 
 Microsoft Visual Studio (c++) 2010
 
 DirectX SDK 9.0 c (Recommended: DXSDK_Jun10 version, the version released in June 2010)
 
-##Build
+###Build
 
 ###Downloading the source code
 The project includes four subproject: game_server for server side, game_client for client side, loader for initializing game process and network, utility as a set of utility classes. Dependencies: game_client and game_server depend on D3D library and utility, and loader depends on utility. 
