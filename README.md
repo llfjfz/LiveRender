@@ -4,10 +4,7 @@ LiveRender is an open source cloud gaming system.
 
 Set up
 ------
-<<<<<<< HEAD
 
-=======
->>>>>>> 3779eabf61233cca4808e51049a4db8186d1c279
 ###Prerequisites
 
 Microsoft Visual Studio (c++) 2010
