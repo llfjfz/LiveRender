@@ -5,6 +5,7 @@
 #pragma comment(lib, "detours/detours.lib")
 
 int main(int argc, char** argv) {
+	//CommandServer for data connect, and CommandNet for input connect.
 	CommandServer cs(1);
 	cs.init();
 

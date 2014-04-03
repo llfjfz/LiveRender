@@ -107,11 +107,10 @@ void Compressor::decode_uint(char*& buffer, UINT& value) {
 	buffer += 5;
 }
 
-//把一个负数赋给一个uint，会变成一个很大的整数，所有得先用zigzag编码一下
-//貌似现在有某些地方是用uint来write，但是用int来read，或者反过来，
-//所以用zigzag来编码会有问题
+//When assign a negative to uint, it will become a large integer. So encoded by zigzag.
+//However, sometime zigzag will be a problem to.
 void Compressor::encode_int(int v, char*& buffer) {
-	//利用zigzag编码把int变成uint
+	//Using zigzag encoding to change int to unit.
 	//UINT value =  (v << 1) ^ (v >> 31);
 	encode_uint(v, buffer);
 }

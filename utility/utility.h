@@ -54,7 +54,7 @@ using namespace std;
 #define Cache_Length_Limit 100
 
 #define Max_Func_Count 200
-#define Max_Buf_Size 2600
+#define Max_Buf_Size 2600			//Buffer size after LZO compression limited by MTU			
 
 #define Source_Count 4
 
