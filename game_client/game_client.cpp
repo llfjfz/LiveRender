@@ -2,6 +2,8 @@
 #include <process.h>
 #include "game_client.h"
 
+//
+//Client entry,to dispatch messages and execute graphics instructions
 
 int op_code;
 int obj_id;
@@ -25,6 +27,7 @@ void usage() {
 	puts("\tgame_client game_name [window_style y/n] [client_id(1-8)]");
 }
 
+//command line format: game_client game_name [window_style y/n] [client_id(1-8)]
 int main(int argc, char** argv) {
 
 	/*

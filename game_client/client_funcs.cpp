@@ -1,5 +1,8 @@
 #include "game_client.h"
 
+//
+//Graphics functions fake for client
+
 IDirect3D9* g_d3d = NULL;
 HWND window_handle = NULL;
 IDirect3DDevice9* cur_device = NULL;

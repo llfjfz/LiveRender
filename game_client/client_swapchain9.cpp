@@ -1,5 +1,8 @@
 #include "client_swapchain9.h"
 
+//
+//SwapChain: Using two buffers to present rendering results
+
 ClientSwapChain9::ClientSwapChain9(IDirect3DSwapChain9* ptr): m_chain(ptr) {
 
 }
