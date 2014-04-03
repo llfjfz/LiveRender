@@ -26,7 +26,7 @@ public:
 	YashTable mesh_table_;
 
 	IDirect3DIndexBuffer9* m_ib;
-	char* cache_buffer; //析构的时候记得要删掉
+	char* cache_buffer; //Must be deleted in destructor
 	char * ram_buffer; // the temp buffer for lock
 	bool isFirst;
 	bool SetFirst;//set isFirst true when true

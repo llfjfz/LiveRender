@@ -26,6 +26,11 @@ STDMETHODIMP WrapperDirect3DDevice9::DrawPrimitive(THIS_ D3DPRIMITIVETYPE Primit
 		Log::log("%d ", cur_vbs_[i]);
 	}
 	
+	//Locate ymesh according startvertex and primitivecount.
+	//startvertex is not necessary to be 0
+	//primitivecount is possible to be 5
+	//offset of setstreamsource might not to be 0
+
 	YMesh* y_mesh = NULL;
 	if(true) {
 		WrapperDirect3DVertexBuffer9* vb0 = cur_vbs_[0];

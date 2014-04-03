@@ -227,7 +227,7 @@ int WrapperDirect3DIndexBuffer9::PrepareIndexBuffer() {
 	cs.write_int(neg);
 	tick_a = GetTickCount();
 	Log::log("\tLock index buffer:%f, cache time:%f\n", tick_e - tick_s, tick_a- tick_s);
-	//获取当前这条指令的长度
+	//Get length of the current command
 	c_len = cs.get_command_length();
 
 	

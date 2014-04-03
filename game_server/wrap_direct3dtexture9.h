@@ -11,7 +11,7 @@ private:
 	static HashSet m_list;
 
 public:
-	bool isSent; // true for send already while false for send the texture right
+	bool isSent;	// true for send already while false for send the texture right
 	D3DFORMAT Format;
 	D3DPOOL Pool;
 	UINT usage;

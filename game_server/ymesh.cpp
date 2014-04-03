@@ -184,6 +184,7 @@ void YMesh::send_format(WrapperDirect3DVertexBuffer9* vb, int sn) {
 	cs.end_command();
 }
 
+//Check whether a decimate is needed
 bool YMesh::need_decimate() {
 	Log::log("YMesh::need_decimate() called\n");
 	if(decision_ != DecimateDecision::INIT) {
@@ -252,13 +253,13 @@ void YMesh::dump_pos() {
 	assert(slim_);
 	assert(slim_->vertices.size() == 0);
 	
-	//如果要decimate时，这个记得去掉
+	//If decimate needed, delete it
 	//if(!need_decimate()) return;
 
 	Vertex v;
 	int v_cnt = 0;
 
-	//vertex of the mesh start from here
+	//Vertex of the mesh start from here
 	vb_data += (base_vertex_index_) * pos_stride;
 
 	if(base_vertex_index_ + init_vertex_count_ > pos_vb_->length / pos_vb_->stride) {
@@ -414,7 +415,7 @@ void YMesh::dump_mesh(bool write_to_file) {
 	*/
 	
 	init_vertex_count_ = get_index_list() + 1;
-	//好烦啊，难道init_vertex_count太大了？
+	//init_vertex_count too large？
 	//init_vertex_count_ = num_vertices_;
 	dump_pos();
 	dump_index();
@@ -436,7 +437,7 @@ void YMesh::select_vertex() {
 
 	if(!need_decimate()) {
 		
-		//TODO 这里有问题 每个sn会重复push back这个vector
+		//TODO Problem every sn will repeat to push back thisvector
 		for(int i=0; i<init_vertex_count_; ++i) remain_vertices_.push_back(i + base_vertex_index_);
 	}
 	else {

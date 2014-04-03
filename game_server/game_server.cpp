@@ -3,6 +3,9 @@
 #include "game_server.h"
 #include "InputServer.h"
 
+//
+//Dll entry, using Detour to intercept graphics instructions
+
 int need_dump_mesh = 0;
 CommandServer cs(Max_Buf_Size);
 
@@ -42,7 +45,7 @@ HWND (WINAPI *CreateWindowExWNext)(
 	HINSTANCE hInstance,
 	LPVOID lpParam) = CreateWindowExW;
 
-//Ωÿ»°ExitProcess
+//Intercept ExitProcess
 void (WINAPI* ExitProcessNext)(UINT uExitCode) = ExitProcess;
 
 void StartHook() {
@@ -81,7 +84,7 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 
 			SetKeyboardHook(NULL, GetCurrentThreadId());
 
-			// create the input server thread
+			//Create input server thread
 			InitializeCriticalSection(&f9);
 			DWORD dwThreadId;
 #ifdef USE_CLIENT_INPUT
@@ -95,7 +98,7 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpRese
 	case DLL_THREAD_DETACH: break;
 	case DLL_PROCESS_DETACH:
 		{
-			//don't do anything here
+			//Don't do anything here
 			break;
 		}
 		WM_ACTIVATE;

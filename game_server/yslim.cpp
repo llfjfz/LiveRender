@@ -40,6 +40,7 @@ inline double YSlim::distance(Vertex v1, Vertex v2) {
 	return sqrt( pow(v1.x - v2.x, 2) + pow(v1.y - v2.y, 2) + pow(v1.z - v2.z, 2) );
 }
 
+//Calculate VTQV, it is a quadric form
 inline double YSlim::vertex_error(Matrix q, double x, double y, double z) {
 	return q[0]*x*x + 2*q[1]*x*y + 2*q[2]*x*z + 2*q[3]*x + q[5]*y*y
 		+ 2*q[6]*y*z + 2*q[7]*y + q[10]*z*z + 2*q[11]*z + q[15];
@@ -80,7 +81,7 @@ void YSlim::add_error(int v1, int v2) {
 	adj[v2].push_back(v1);
 }
 
-//use for boundaries constrain
+//Use for boundaries constrain
 void YSlim::add_edge_face(int v1, int v2, int f) {
 	if(v1 > v2) swap(v1, v2);
 	it = ed_faces_mp_.find(make_pair(v1, v2));
@@ -115,7 +116,7 @@ bool YSlim::is_border(int v1, int v2) {
 		return false;
 }
 
-//select the vertex pair at the head of queue
+//Select the vertex pair at head of queue
 void YSlim::select_pair() {
 	
 	for(int i=0; i<adj.size(); ++i) {

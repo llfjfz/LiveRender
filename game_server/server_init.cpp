@@ -16,6 +16,8 @@
 
 #include "ymesh.h"
 
+//
+//Create server's window, create Direct3D9 object, and init network socket
 
 int WrapperDirect3D9::ins_count = 0;
 int WrapperDirect3DDevice9::ins_count = 0;
@@ -41,6 +43,8 @@ HashSet WrapperDirect3DCubeTexture9::m_list;
 HashSet WrapperDirect3DSwapChain9::m_list;
 HashSet WrapperDirect3DSurface9::m_list;
 
+//Intercept CreateWindow operation and its parameters, 
+//send them to client for client's window creation. 
 HWND WINAPI CreateWindowCallback(DWORD dwExStyle,LPCSTR lpClassName,LPCSTR lpWindowName, DWORD dwStyle,int x,int y,int nWidth,int nHeight,HWND hWndParent, HMENU hMenu,HINSTANCE hInstance,LPVOID lpParam) {
 	Log::slog("CreateWindowCallback() called, width:%d, height:%d\n", nWidth, nHeight);
 	/*if( nWidth < 800)nWidth = 800;
@@ -170,6 +174,7 @@ void WINAPI ExitProcessCallback(UINT uExitCode) {
 	ExitProcessNext(uExitCode);
 }
 
+//Changing Privileges in a Token 
 void RaiseToDebugP()
 {
 	HANDLE hToken;

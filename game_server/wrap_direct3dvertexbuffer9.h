@@ -17,16 +17,16 @@ public:
 
 	YMesh* owner_mesh_;
 
-	bool changed;// this flag indicate that the buffer has been locked
+	bool changed;		// A flag indicates that the buffer has been locked
 	bool readed_;
 	
-	char* cache_buffer; //析构的时候记得要删掉
+	char* cache_buffer; //Must be deleted in destructor
 	char * ram_buffer;
 
 	YMesh* y_mesh_;
 
 	bool isFirst;
-	bool SetFirst; // set isFirst true when true
+	bool SetFirst;		// Set isFirst true when true
 	DWORD Usage;
 	DWORD FVF;
 	D3DPOOL Pool;
@@ -37,7 +37,7 @@ public:
 	short stride;
 	float max_vertex_value;
 
-	// used in SetStreamSource
+	// Used in SetStreamSource
 	short streamNumber;
 	unsigned int offsetInBytes;
 
@@ -45,7 +45,7 @@ public:
 	bool getNormalTangentOffsetAndSize();
 
 	int length;
-	bool isSent; // the vertex buffer has been sent to client already?
+	bool isSent;		//Vertex buffer has been sent to client already?
 	static HashSet m_list;
 	static int ins_count;
 	WrapperDirect3DVertexBuffer9(IDirect3DVertexBuffer9* ptr, int _id, int _length);

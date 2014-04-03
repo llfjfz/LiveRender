@@ -9,8 +9,8 @@ using namespace std;
 
 struct YashNode {
 	void* val;
-	YashNode* next_hash;
-	YashNode* next;
+	YashNode* next_hash;	//Hash table bucket pointer
+	YashNode* next;			//LRU double linked list pointers, next and prev
 	YashNode* prev;
 	int key_length;
 	UINT hash;
