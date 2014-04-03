@@ -27,7 +27,7 @@ using namespace std;
 //#define USE_FLOAT_COMPRESS
 #define USE_CACHE
 
-//#define USE_CLIENT_INPUT
+#define USE_CLIENT_INPUT
 
 //#define ENABLE_LOG
 #define ENABLE_NETWORK_COMPRESS
