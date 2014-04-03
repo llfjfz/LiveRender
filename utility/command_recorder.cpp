@@ -4,6 +4,9 @@
 using namespace std;
 #include <iostream>
 
+//Commands information record class.
+//Recording information about cache running now.
+
 char mp[100][100] = {
 	"CreateDevice",
 	"BeginScene",
