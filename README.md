@@ -41,6 +41,8 @@ Game test cases
 
 SprillRitchie: http://sprill-ritchie-abenteuerliche-zeitreise.software.informer.com/1.0/
 
+Shadowrun returns: http://harebrained-schemes.com/shadowrun/
+
 CastleStorm: http://www.castlestormgame.com/
 
 Trine: http://trine-thegame.com/site/
