@@ -7,9 +7,9 @@ Set up
 
 ###Prerequisites
 
-Microsoft Visual Studio (c++) 2010
+Microsoft Visual Studio (c++) 2010 (If you want to quick start, you can install Microsoft Visual C++ 2010 Redistributable Package, http://www.microsoft.com/en-us/download/details.aspx?id=5555)
 
-DirectX SDK 9.0 c (Recommended: DXSDK_Jun10 version, the version released in June 2010)
+DirectX SDK 9.0 c (Recommended: DXSDK_Jun10 version, the version released in June 2010, http://www.microsoft.com/en-us/download/details.aspx?id=6812)
 
 ###Build
 
