@@ -30,7 +30,7 @@ Configuration Type.
 
 Quick Start
 -----------
-
+You can start with our pre-compiled exe files for Windows x86(with Visual Studio C++ 2010).
 ###Server Side
 Copy files: "game_server.conf", "game_server.dll", "loader.exe" and "SDL2.dll" from "Release" directory to the game directory. Make sure these files are standing in the same directory of the game exe file. Run the "loader.exe".
 ###Client Side
