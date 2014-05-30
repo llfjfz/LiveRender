@@ -7,9 +7,9 @@ Set up
 
 ###Prerequisites
 
-Microsoft Visual Studio (c++) 2010
+Microsoft Visual Studio (c++) 2010 (If you want to quick start, you can install Microsoft Visual C++ 2010 Redistributable Package, http://www.microsoft.com/en-us/download/details.aspx?id=5555)
 
-DirectX SDK 9.0 c (Recommended: DXSDK_Jun10 version, the version released in June 2010)
+DirectX SDK 9.0 c (Recommended: DXSDK_Jun10 version, the version released in June 2010, http://www.microsoft.com/en-us/download/details.aspx?id=6812)
 
 ###Build
 
@@ -30,16 +30,18 @@ Configuration Type.
 
 Quick Start
 -----------
-
+You can start with our pre-compiled exe files for Windows x86(with Visual Studio C++ 2010).
 ###Server Side
 Copy files: "game_server.conf", "game_server.dll", "loader.exe" and "SDL2.dll" from "Release" directory to the game directory. Make sure these files are standing in the same directory of the game exe file. Run the "loader.exe".
 ###Client Side
-Copy files: "game_client.conf", "game_client.exe", "SDL2.dll" to a folder. Configurate "game_client.conf", set ip address to the server's ip. Then shit + right mouse-clicking, choose "Open a command window here". Use commands: game_client.exe game_name, here game_name refers to the game(name of game exe) you want to start in the server side.
+Copy files: "game_client.conf", "game_client.exe", "SDL2.dll" to a folder. Configurate "game_client.conf", set ip address to the server's ip. Then shit + right mouse-clicking, choose "Open a command window here". Use commands: game_client game_name, here game_name refers to the game(name of game exe) you want to start in the server side. For example, game_client trine.
 
 Game test cases
 ---------------
 
 SprillRitchie: http://sprill-ritchie-abenteuerliche-zeitreise.software.informer.com/1.0/
+
+Shadowrun returns: http://harebrained-schemes.com/shadowrun/
 
 CastleStorm: http://www.castlestormgame.com/
 
