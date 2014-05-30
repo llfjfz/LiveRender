@@ -162,7 +162,7 @@ STDMETHODIMP_(ULONG) WrapperDirect3DTexture9::Release(THIS) {
 	//return D3D_OK;
 }
 
-/*** IDirect3DBaseTexture9 methods ***/
+/*** IDirect3DResource9 methods ***/
 STDMETHODIMP WrapperDirect3DTexture9::GetDevice(THIS_ IDirect3DDevice9** ppDevice) {
 	Log::log("WrapperDirect3DTexture9::GetDevice() TODO\n");
 	return m_tex->GetDevice(ppDevice);
@@ -200,6 +200,8 @@ STDMETHODIMP_(D3DRESOURCETYPE) WrapperDirect3DTexture9::GetType(THIS) {
 	return m_tex->GetType();
 }
 
+
+/*** IDirect3DBaseTexture9 methods ***/
 STDMETHODIMP_(DWORD) WrapperDirect3DTexture9::SetLOD(THIS_ DWORD LODNew) {
 	Log::log("WrapperDirect3DTexture9::SetLOD() TODO\n");
 	return m_tex->SetLOD(LODNew);
@@ -248,6 +250,7 @@ STDMETHODIMP_(void) WrapperDirect3DTexture9::GenerateMipSubLevels(THIS) {
 	return m_tex->GenerateMipSubLevels();
 }
 
+/*** IDirect3DTexture9 methods ***/
 STDMETHODIMP WrapperDirect3DTexture9::GetLevelDesc(THIS_ UINT Level,D3DSURFACE_DESC *pDesc) {
 	Log::log("WrapperDirect3DTexture9::GetLevelDesc() called\n");
 	return m_tex->GetLevelDesc(Level, pDesc);
