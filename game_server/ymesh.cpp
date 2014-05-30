@@ -3,6 +3,10 @@
 #include "wrap_direct3ddevice9.h"
 #include "float_helper.h"
 
+/**
+The abstract model class
+**/
+
 vector<YMesh*> YMesh::mesh_list;
 
 int YMesh::decimate_count_ = 0;
