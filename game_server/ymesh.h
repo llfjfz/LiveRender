@@ -160,6 +160,8 @@ private:
 	int cur_prim_count_;
 
 	static int decimate_count_;
+
+	int cur_frame_;
 };
 
 #endif

@@ -58,6 +58,8 @@ YMesh::YMesh(WrapperDirect3DDevice9* device): bs_(1000) {
 	memset(select_result_sent_, 0, sizeof select_result_sent_);
 
 	mesh_list.push_back(this);
+
+	cur_frame_ = 0;
 }
 
 bool YMesh::vb_changed(WrapperDirect3DVertexBuffer9* cur_vbs[]) {
@@ -517,7 +519,14 @@ void YMesh::update_vertex_buffer(int sn) {
 		Log::log("YMesh::update_vertex_buffer(), vb %d doesn't change\n", vb_->GetId());
 		goto RET;
 	}
-	
+
+#ifdef USE_BUFFER_EVEN_ODD
+	if(cur_frame_ != 0)
+		goto RET;
+#endif
+	/**
+	Updating vertex buffer begin_command~end_command
+	**/
 	cs.begin_command(VertexBufferUnlock_Opcode, vb_->GetId());
 	/*
 	cs.write_uint(vb_->m_LockData.OffsetToLock);
@@ -683,6 +692,8 @@ void YMesh::render(INT BaseVertexIndex,UINT MinVertexIndex, int offest, int prim
 
 		update_vertex_buffer(i);
 	}
+
+	cur_frame_ ^= 1;
 
 	if(need_decimate()) {
 
