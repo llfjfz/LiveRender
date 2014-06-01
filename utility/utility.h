@@ -17,7 +17,7 @@
 
 using namespace std;
 
-//Begin Compile Condition
+//////////////////////////////////////////Begin Compile Condition///////////////////////////////////////////
 
 //#define MEM_FILE_TEX
 //#define SAVE_IMG
@@ -26,6 +26,7 @@ using namespace std;
 //#define LOCAL_IMG
 //#define USE_FLOAT_COMPRESS
 #define USE_CACHE
+#define USER_BUFFER_EVEN_ODD
 
 #define USE_CLIENT_INPUT
 
@@ -34,7 +35,7 @@ using namespace std;
 #define ENABLE_SERVER_RENDERING
 
 //#define Enable_Command_Validate
-//End Compile Condition
+//////////////////////////////////////////End Compile Condition/////////////////////////////////////////////
 
 #pragma comment(lib, "ws2_32.lib")
 #pragma comment(lib, "winmm.lib")
