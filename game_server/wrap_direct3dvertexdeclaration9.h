@@ -2,6 +2,10 @@
 #define __WRAP_DIRECT3DVERTEXDECLARATION9__
 
 #include "game_server.h"
+/**
+FVF(Flexible Vertex Format), will transform to vertex declaration. The IDirect3DVertexDeclaration9
+is usually used in shader programming 
+**/
 
 class WrapperDirect3DVertexDeclaration9: public IDirect3DVertexDeclaration9 {
 private:
