@@ -45,6 +45,7 @@ HRESULT ClientVertexBuffer9::Unlock() {
 	return D3D_OK;
 }
 
+//Decimate vertice format: Vertex count; Vertice list.
 HRESULT ClientVertexBuffer9::SetDecimateResult() {
 	Log::log("ClientVertexBuffer9::SetDecimateResult()\n");
 
@@ -148,6 +149,7 @@ void ClientVertexBuffer9::UpdateVertexBuffer() {
 	//Log::log("server remain size=%d\n", server_remain);
 	Log::log("client remain size=%d\n", remain_vertices_.size());
 
+	//vertex number
 	int bs_count = cc.read_int();
 
 #ifdef USE_FLOAT_COMPRESS
