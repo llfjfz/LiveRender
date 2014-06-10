@@ -39,6 +39,7 @@ int Network::send_packet(Buffer* buffer) {
 	//Log::log("Network::send_packet(), buffer size=%d\n", buffer->get_size());
 	Compressor::lzo_encode(buffer->get_buffer() + 4, buffer->get_size() - 4, buffer->com_buffer_ + 4, out_len);
 	out_len += 4;
+	//4 bytes for packet length
 	memcpy(buffer->com_buffer_, &out_len, 4);
 
 	int len = send(connect_socket, buffer->com_buffer_, out_len, 0);

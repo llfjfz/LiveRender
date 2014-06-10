@@ -97,6 +97,7 @@ void CommandServer::begin_command(int op_code, int obj_id) {
 
 #ifdef USE_CACHE
 	if(cache_filter[op_code]) {
+		//2 bytes command head
 		rid_pos = get_cur_ptr(2);
 		memset(rid_pos, 0, 2);
 	}
@@ -128,7 +129,7 @@ void CommandServer::end_command(int force_flush) {
 			write_ushort((hit_id << 1) | Cache_Use);
 			cr_->cache_hit(op_code);
 		}
-		else {
+		else {//Cache missing
 			*( (unsigned short*)rid_pos ) = (rep_id << 1) | Cache_Set;
 			cr_->cache_miss(op_code);
 		}
