@@ -84,6 +84,7 @@ int main(int argc, char** argv) {
 	// input client connect to the server
 	dic->ConnectServer(100);
 
+	//Send the game name
 	cc.send_raw_buffer(string(argv[1]));
 
 

@@ -46,7 +46,9 @@ public:
 	void write_float(float);
 	void write_byte_arr(char* src, int length);
 
+	//Data compressed buffer
 	char* com_buffer_;
+	//Raw data buffer
 	char* buffer_;
 
 protected:

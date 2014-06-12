@@ -153,11 +153,11 @@ STDMETHODIMP WrapperDirect3DDevice9::DrawIndexedPrimitive(THIS_ D3DPRIMITIVETYPE
 	cur_decl_ = NULL;
 	
 	*/
-
-if(enableRender)
-	return m_device->DrawIndexedPrimitive(Type, BaseVertexIndex, MinVertexIndex, NumVertices, startIndex, primCount);
-else
-	return D3D_OK;
+	//Enable local rendering
+	if(enableRender)
+		return m_device->DrawIndexedPrimitive(Type, BaseVertexIndex, MinVertexIndex, NumVertices, startIndex, primCount);
+	else
+		return D3D_OK;
 
 }
 
