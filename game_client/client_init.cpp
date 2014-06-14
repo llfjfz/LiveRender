@@ -30,6 +30,7 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 
 extern HWND CreateWindowWithSDL(int w, int h, int x, int y);
 
+//Called by FakeDCreateWindow
 bool init_window(int width, int height, DWORD dwExStyle, DWORD dwStyle) {
 	Log::slog("init_window(), width=%d, height=%d\n", width, height);
 	WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0, 0, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, WINDOW_CLASS, NULL };
@@ -61,6 +62,7 @@ D3DPRESENT_PARAMETERS d3dpp;
 
 extern IDirect3DDevice9* cur_device;
 
+//Called by FakedCreateDevice.
 HRESULT client_init() {
 	Log::slog("client_init() called\n");
 

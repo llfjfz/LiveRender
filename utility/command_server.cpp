@@ -150,6 +150,11 @@ void CommandServer::end_command(int force_flush) {
 		if(len <= 0) {
 			Log::log("CommandServer::end_command(), len <= 0\n");
 		}
+		
+		//Testing size
+		if(get_size() >= size_limit_ )
+			Log::slog("buffer size too small.\n");
+
 	}
 }
 
