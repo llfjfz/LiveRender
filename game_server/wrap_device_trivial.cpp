@@ -227,6 +227,8 @@ STDMETHODIMP WrapperDirect3DDevice9::Present(THIS_ CONST RECT* pSourceRect,CONST
 #endif
 	/////////////////////////////////////////////////////////////////////
 	cs.end_command();
+	//Transmitting one frame as a whole
+	//cs.end_command(1);
 
 	is_even_frame_ ^= 1;
 	

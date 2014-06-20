@@ -140,7 +140,7 @@ private:
 	float config_ratio_;
 
 	
-	vector<int> remain_vertices_;		//Store vertice after decimating?
+	vector<int> remain_vertices_;		//Store vertice
 	vector<int> indices_;
 
 	int select_result_sent_[Source_Count];

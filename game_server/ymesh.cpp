@@ -612,6 +612,7 @@ void YMesh::decimate() {
 		decimated_ = 0;
 	}
 
+	//One mesh only decimated once.
 	if(decimated_) return;
 	decimated_ = true;
 

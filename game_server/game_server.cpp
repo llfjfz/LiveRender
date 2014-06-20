@@ -7,8 +7,9 @@
 //Dll entry, using Detour to intercept graphics instructions
 
 int need_dump_mesh = 0;
-//CommandServer cs(Max_Buf_Size);
-CommandServer cs(MAXPACKETSIZE);
+CommandServer cs(Max_Buf_Size);
+//Testing the whole frame transmitting
+//CommandServer cs(MAXPACKETSIZE);
 
 bool enableRender = true;
 bool F9Pressed = false;
