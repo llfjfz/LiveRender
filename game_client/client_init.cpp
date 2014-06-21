@@ -74,7 +74,7 @@ HRESULT client_init() {
 
 	/////////////////////////////////////////////
 	//Read data from WrapperDirect3D9::CreateDevice operation
-	//Take the object instance as object id, begin from 0
+	//Take object instance as the object id, begin from 0
 	int id = cc.read_int();
 	UINT Adapter = cc.read_uint();
 	D3DDEVTYPE DeviceType = (D3DDEVTYPE)(cc.read_uint());
@@ -99,6 +99,7 @@ HRESULT client_init() {
 
 	LPDIRECT3DDEVICE9 base_device = NULL;
 	HRESULT hr = g_d3d->CreateDevice(Adapter, DeviceType, hh, BehaviorFlags, &d3dpp, &base_device);
+	//D3D Application may create more than one D3D9Device
 	device_list[id] = base_device;
 	cur_device= base_device;
 

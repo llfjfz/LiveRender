@@ -1,6 +1,7 @@
 #include "common_net.h"
 
-/* construct common net with type
+/* 
+* construct common net with type
 * param: type, the type of the net instance, 1 for server, and 2 for client
 */
 #define BUFF_LEN 1000000
