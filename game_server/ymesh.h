@@ -140,7 +140,7 @@ private:
 	float config_ratio_;
 
 	
-	vector<int> remain_vertices_;
+	vector<int> remain_vertices_;		//Store vertice
 	vector<int> indices_;
 
 	int select_result_sent_[Source_Count];
@@ -149,7 +149,7 @@ private:
 
 	static vector<YMesh*> mesh_list;
 
-	//DrawIndexPrimitive params
+	//DrawIndexedPrimitive params
 	D3DPRIMITIVETYPE type_;
 	INT base_vertex_index_;
 	UINT min_vertex_index_;

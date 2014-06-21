@@ -106,6 +106,7 @@ void CommandServer::begin_command(int op_code, int obj_id) {
 }
 
 void CommandServer::end_command(int force_flush) {
+	Log::log("End command.\n");
 
 #ifdef USE_CACHE
 	//append or replace cache info
@@ -146,10 +147,19 @@ void CommandServer::end_command(int force_flush) {
 	}
 
 	if(force_flush || get_size() >= size_limit_) {
+		//Testing condition
+		if(get_size() >= size_limit_ )
+			Log::log("Buffer size is larger than limited\n");
+		else
+			Log::log("Buffer force_flush, size is %d\n", get_size());
+
 		int len = flush();
 		if(len <= 0) {
 			Log::log("CommandServer::end_command(), len <= 0\n");
 		}
+		
+		
+
 	}
 }
 
@@ -163,6 +173,8 @@ int CommandServer::get_command_length() {
 }
 
 int CommandServer::flush() {
+	Log::log("Buffer flush.\n");
+
 	set_count_part(func_count_);
 	int len = send_packet(this);
 

@@ -295,7 +295,7 @@ int YMesh::get_index_data(char*& ib_data, int& i, D3DFORMAT format) {
 		i += 4;
 		ib_data += 4;
 	}
-	else {
+	else {//D3DFMT_INDEX16
 		ret = *( (unsigned short*)(ib_data) );
 		i += 2;
 		ib_data += 2;
@@ -492,10 +492,12 @@ void YMesh::update_index_buffer(WrapperDirect3DIndexBuffer9* ib) {
 	cs.end_command();
 }
 
+//Update the specified(by sn) vertex buffer
 void YMesh::update_vertex_buffer(int sn) {
 	Log::log("YMesh::update_vertex_buffer() called\n");
 
 	WrapperDirect3DVertexBuffer9* vb_ = vbs_[sn];
+	//Init the cache buffer for the first time
 	if(vb_->isFirst) {
 		memset(vb_->cache_buffer, 0, vb_->length);
 
@@ -558,6 +560,7 @@ void YMesh::update_vertex_buffer(int sn) {
 
 	for(int i=0; i<remain_vertices_.size(); ++i) {
 
+		//Only transmits the changed vertice
 		if(bs_.is_set(i)) {
 
 			vt = sv_vt + remain_vertices_[i] * vb_->stride;
@@ -569,6 +572,7 @@ void YMesh::update_vertex_buffer(int sn) {
 			
 			for(int j=0; j<source_format_[sn].size(); ++j) {
 				parse_node& nd = source_format_[sn][j];
+				//Write different types of vertice to the buffer for sending to the client
 				int ret = nd.func_(this, vb_, vt, nd.offest_, nd.size_);
 
 			}
@@ -608,6 +612,7 @@ void YMesh::decimate() {
 		decimated_ = 0;
 	}
 
+	//One mesh only decimated once.
 	if(decimated_) return;
 	decimated_ = true;
 
@@ -625,12 +630,14 @@ void YMesh::decimate() {
 			decimate_ib_ = NULL;
 		}
 
+		//Rebuild index buffer indicates remaining vertice 
 		create_index_buffer(slim_->faces.size() * 3, slim_, &decimate_ib_);
 	}
 
 	select_vertex();
 }
 
+//Check for the position change using Bitset.
 void YMesh::select_pos_change() {
 	bs_.reset(max(1, remain_vertices_.size()));
 

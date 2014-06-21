@@ -12,6 +12,8 @@ Buffer::Buffer(): capacity_(MAXPACKETSIZE) {
 	com_buffer_ = new char[capacity_ + 105];
 
 	cur_ptr = buffer_ + 4;
+
+	//printf("Default constructor called.\n");
 }
 
 Buffer::Buffer(const Buffer& other) {
