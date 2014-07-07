@@ -1023,6 +1023,35 @@ void YMesh::log_meshes(char* fname) {
 		mesh_list[i]->stat(f);
 	}
 
+	//Statics mesh update count and data bytes
+	int statics_update_count[12]={0};
+	int updatecount=0;
+
+	long long statics_data_bytes[12]={0};
+	long long databytes = 0;
+	for(int i=0; i<mesh_list.size(); ++i){
+		updatecount = mesh_list[i]->update_count_;
+		databytes = mesh_list[i]->data_bytes_;
+		if(updatecount>10){
+			statics_update_count[11]++;
+			statics_data_bytes[11] += databytes;
+		}
+		else{
+			statics_update_count[updatecount]++;
+			statics_data_bytes[updatecount] += databytes;
+		}
+	}
+	long long frequent_databytes = 0;
+	long long unfrequent_databytes = 0;
+	for(int i=0; i<6; i++){
+		unfrequent_databytes += statics_data_bytes[i];
+		frequent_databytes += statics_data_bytes[11 - i];
+	}
+	for(int i=1; i<12; i++)
+		fprintf(f, "update_count_ %d: %d\n", i, statics_update_count[i]);
+	fprintf(f, "unfrequent_databytes: %ld\n", unfrequent_databytes);
+	fprintf(f, "frequent_databytes: %ld\n", frequent_databytes);
+
 	fclose(f);
 	
 }

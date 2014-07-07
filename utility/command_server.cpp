@@ -4,7 +4,8 @@ CommandServer::CommandServer(): func_count_(0), size_limit_(Max_Buf_Size) {
 	//reserve 2 bytes for func_count
 	get_cur_ptr(2);
 
-	cache_mgr_ = new Cache();
+	//cache_mgr_ = new Cache();
+	cache_mgr_ = new LFUCache();
 	set_cache_filter();
 
 	obj_id = -1;
@@ -18,7 +19,8 @@ CommandServer::CommandServer(int size_limit): func_count_(0), size_limit_(size_l
 	//reserve 2 bytes for func_count
 	get_cur_ptr(2);
 
-	cache_mgr_ = new Cache();
+	//cache_mgr_ = new Cache();
+	cache_mgr_ = new LFUCache();
 	set_cache_filter();
 
 	obj_id = -1;
