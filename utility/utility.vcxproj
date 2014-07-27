@@ -70,8 +70,11 @@
     <ClInclude Include="common_net.h" />
     <ClInclude Include="compressor.h" />
     <ClInclude Include="config.h" />
+    <ClInclude Include="fifo_cache.hpp" />
     <ClInclude Include="float_helper.h" />
     <ClInclude Include="hash_set.h" />
+    <ClInclude Include="lfu_cache.hpp" />
+    <ClInclude Include="lfu_cache_linked.hpp" />
     <ClInclude Include="log.h" />
     <ClInclude Include="lzo\lzoconf.h" />
     <ClInclude Include="lzo\lzodefs.h" />

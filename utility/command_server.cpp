@@ -4,8 +4,7 @@ CommandServer::CommandServer(): func_count_(0), size_limit_(Max_Buf_Size) {
 	//reserve 2 bytes for func_count
 	get_cur_ptr(2);
 
-	//cache_mgr_ = new Cache();
-	cache_mgr_ = new LFUCache();
+	
 	set_cache_filter();
 
 	obj_id = -1;
@@ -13,14 +12,18 @@ CommandServer::CommandServer(): func_count_(0), size_limit_(Max_Buf_Size) {
 	cr_ = new CommandRecorder();
 	config_ = new ServerConfig("game_server.conf");
 	config_->load_config();
+
+//	cache_mgr_ = new Cache(config_->cache_capacity);
+//	cache_mgr_ = new LFUCache(config_->cache_capacity);
+	cache_mgr_ = new FIFOCache(config_->cache_capacity);
+	printf("Cache capacity %d", config_->cache_capacity);
 }
 
 CommandServer::CommandServer(int size_limit): func_count_(0), size_limit_(size_limit) {
 	//reserve 2 bytes for func_count
 	get_cur_ptr(2);
 
-	//cache_mgr_ = new Cache();
-	cache_mgr_ = new LFUCache();
+	
 	set_cache_filter();
 
 	obj_id = -1;
@@ -28,6 +31,12 @@ CommandServer::CommandServer(int size_limit): func_count_(0), size_limit_(size_l
 	cr_ = new CommandRecorder();
 	config_ = new ServerConfig("game_server.conf");
 	config_->load_config();
+
+//	cache_mgr_ = new Cache(config_->cache_capacity);
+//	cache_mgr_ = new LFUCache(config_->cache_capacity);
+	cache_mgr_ = new FIFOCache(config_->cache_capacity);
+
+	printf("Cache capacity %d", config_->cache_capacity);
 }
 
 CommandServer::~CommandServer() {
@@ -117,6 +126,7 @@ void CommandServer::end_command(int force_flush) {
 		cache_mgr_->get_cache_index(sv_ptr, get_command_length(), hit_id, rep_id);
 
 		if(hit_id != -1) {
+			//Cache hit
 #ifdef Enable_Command_Validate
 			if(obj_id)
 				go_back(sv_ptr + 7);
@@ -132,6 +142,7 @@ void CommandServer::end_command(int force_flush) {
 			cr_->cache_hit(op_code);
 		}
 		else {
+			//Cache miss
 			*( (unsigned short*)rid_pos ) = (rep_id << 1) | Cache_Set;
 			cr_->cache_miss(op_code);
 		}
@@ -159,9 +170,6 @@ void CommandServer::end_command(int force_flush) {
 		if(len <= 0) {
 			Log::log("CommandServer::end_command(), len <= 0\n");
 		}
-		
-		
-
 	}
 }
 
@@ -180,7 +188,7 @@ int CommandServer::flush() {
 	set_count_part(func_count_);
 	int len = send_packet(this);
 
-	cr_->add_lengh(len);
+	cr_->add_length(len);
 
 	//reset the buffer
 	func_count_ = 0;

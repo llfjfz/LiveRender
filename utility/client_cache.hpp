@@ -17,7 +17,8 @@ public:
 	}
 
 private:
-	char buffer[30010][205];
+//	char buffer[30010][205];
+	char buffer[65000][205];
 	char* cur_ptr;
 public:
 	int set_cnt, hit_cnt;

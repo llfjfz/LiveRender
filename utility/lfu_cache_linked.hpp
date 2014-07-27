@@ -29,8 +29,11 @@ struct HashNode {
 
 struct FreqNode {
 	int freq;
-	HashNode* prev;
-	HashNode* next;
+	FreqNode* fn_prev;
+	FreqNode* fn_next;
+	HashNode* hn_prev;
+	HashNode* hn_next;
+
 };
 
 class HashTable {
@@ -120,16 +123,17 @@ private:
 
 class LFUCache {
 public:
-	LFUCache(): last_id(0), capacity_(3000) {
+	LFUCache(int capacity): last_id(0), capacity_(capacity) {
 		hit_cnt = 0;
 		set_cnt = 0;
+		head_.fn_prev = head_.fn_next = &head_;
+		head_.hn_prev = head_.hn_next = NULL;
 	}
 
 	~LFUCache() {
-		list<FreqNode*>::iterator iter;
-		for(iter=freqlist_.begin(); iter != freqlist_.end(); iter++){
-			HashNode* e = (*iter)->prev;
-			if(e != NULL){
+		for(FreqNode* f=head_.fn_next; f!=&head_;){
+			HashNode* e = f->hn_prev;
+			if(e!=NULL){
 				while(e->next != e){
 					HashNode* next = e->next;
 					lfu_release(e);
@@ -137,8 +141,11 @@ public:
 				}
 				lfu_release(e);
 			}
+			FreqNode* next = f->fn_next;
+			lfu_release(f);
+			f = next;
 		}
-		freqlist_.clear();
+		lfu_release(&head_);
 	}
 
 	static inline UINT hash_slice(const Slice& s) {
@@ -148,23 +155,23 @@ public:
 	void set_capacity(int capacity) { capacity_ = capacity; }
 	int get_capacity() const { return capacity_; }
 
-	void lfu_release(HashNode* e){
-		free(e);
+	void lfu_release(void* node){
+		free(node);
 	}
 
-	void lfu_remove(FreqNode* f, HashNode* e) {
+	void hashnode_remove(FreqNode* f, HashNode* e) {
 		if(e->prev == e && e->next == e){
 			//Only one HashNode in the frequency list
-			f->prev = f->next = NULL;
+			f->hn_prev = f->hn_next = NULL;
 		}
 		else if(e->prev == e){
 			//The first HashNode
-			f->prev = e->next;
+			f->hn_prev = e->next;
 			e->next->prev = e->next;
 		}
 		else if(e->next == e){
 			//The last HashNode
-			f->next = e->prev;
+			f->hn_next = e->prev;
 			e->prev->next = e->prev;
 		}
 		else{
@@ -174,18 +181,31 @@ public:
 		}		
 	}
 
-	void lfu_append(FreqNode* f, HashNode* e){
+	void hashnode_append(FreqNode* f, HashNode* e){
 		//Appending e after the FreqNode, at head of HashNode with same frenqucy
-		if(f->prev == NULL || f->next == NULL){
+		if(f->hn_prev == NULL || f->hn_next == NULL){
 			//The freqNode is newly added
-			f->prev = f->next = e->prev = e->next = e;
+			f->hn_prev = f->hn_next = e->prev = e->next = e;
 		}
 		else{
-			e->next = f->prev;
-			f->prev->prev = e;
+			e->next = f->hn_prev;
+			f->hn_prev->prev = e;
 			e->prev = e;
-			f->prev = e;
+			f->hn_prev = e;
 		}	
+	}
+
+	void freqnode_append(FreqNode* cur, FreqNode* f){
+		//head_.fn_next indicates the first node, head_.fn_prev indicates the last node
+		f->fn_prev = cur;
+		f->fn_next = cur->fn_next;
+		cur->fn_next->fn_prev = f;
+		cur->fn_next = f;
+	}
+	
+	void freqnode_remove(FreqNode* f){
+		f->fn_next->fn_prev = f->fn_prev;
+		f->fn_prev->fn_next = f->fn_next;
 	}
 
 	HashNode* insert(const Slice& key, int& hit_id, int& rep_id) {
@@ -196,7 +216,7 @@ public:
 
 		HashNode* old = table_.insert(e);
 		int nextFreq;
-		//FreqNode* currentNode;
+		FreqNode* currentNode;
 		FreqNode* nextFreqNode;
 		int flag = 0;
 
@@ -208,46 +228,35 @@ public:
 			hit_id = e->cache_id;
 			rep_id = -1;
 			
-			//currentNode = old->freqNode;
-			list<FreqNode*>::iterator cur_iter,temp;
-			temp = cur_iter = find(freqlist_.begin(), freqlist_.end(), old->freqNode);
-
-			Log::slog("LFUCache freqlist_, size=%d\n",freqlist_.size());
-			
-/*			if( *cur_iter == NULL){
-				nextFreq = 1;
-				nextFreqNode = freqlist_.front();
-			}
-			else{
-				nextFreq = (*cur_iter)->freq + 1;
-				nextFreqNode = *(cur_iter + 1);
-			}*/
-			nextFreq = (*cur_iter)->freq + 1;
-			nextFreqNode = *(++temp);
+			currentNode = old->freqNode;
+			nextFreqNode = currentNode->fn_next;
+			nextFreq = currentNode->freq + 1;
 
 			if(nextFreqNode == NULL || nextFreq != nextFreqNode->freq){
 				//Create a new FreqNode
 				FreqNode* newNode = reinterpret_cast<FreqNode*>(malloc(sizeof(FreqNode)));
 				newNode->freq = nextFreq;
-				newNode->prev = NULL;
-				newNode->next = NULL;
+				newNode->fn_prev = NULL;
+				newNode->fn_next = NULL;
+				newNode->hn_prev = NULL;
+				newNode->hn_next = NULL;
 				nextFreqNode = newNode;
 				flag = 1;
-				Log::slog("LFUCache newNode, freq=%d, prev=%p, next=%p\n", newNode->freq, newNode->prev, newNode->next);
+				Log::slog("LFUCache newNode, freq=%d, prev=%p, next=%p\n", newNode->freq, newNode->hn_prev, newNode->hn_next);
 			}		
 
 			if(1 == flag){
-				freqlist_.insert(temp, nextFreqNode);
+				freqnode_append(currentNode, nextFreqNode);
 			}
-			lfu_append(nextFreqNode, e);
+			hashnode_append(nextFreqNode, e);
 
-			Log::slog("LFUCache nextFreqNode, freq=%d, prev=%p, next=%p, address=%p\n", nextFreqNode->freq, nextFreqNode->prev, nextFreqNode->next, nextFreqNode);
+			Log::slog("LFUCache nextFreqNode, freq=%d, prev=%p, next=%p, address=%p\n", nextFreqNode->freq, nextFreqNode->hn_prev, nextFreqNode->hn_next, nextFreqNode);
 					
 			e->freqNode = nextFreqNode;
 
 			Log::slog("LFUCache HashNode, freqNode=%p, prev=%p, next=%p, address=%p\n", e->freqNode, e->prev, e->next, e);
 
-			lfu_remove(*cur_iter, old);
+			hashnode_remove(currentNode, old);
 			lfu_release(old);		
 
 			hit_cnt++;
@@ -259,25 +268,27 @@ public:
 			hit_id = -1;
 
 			nextFreq = 1;
-			nextFreqNode = freqlist_.front();
+			nextFreqNode = head_.fn_next;
 			if(nextFreqNode == NULL || nextFreqNode->freq != 1){
 				FreqNode* newNode = reinterpret_cast<FreqNode*>(malloc(sizeof(FreqNode)));
 				newNode->freq = 1;
-				newNode->prev = NULL;
-				newNode->next = NULL;
+				newNode->fn_prev = NULL;
+				newNode->fn_next = NULL;
+				newNode->hn_prev = NULL;
+				newNode->hn_next = NULL;
 				nextFreqNode = newNode;
 				flag = 1;
-				Log::slog("LFUCache newNode, freq=%d, prev=%p, next=%p\n", newNode->freq, newNode->prev, newNode->next);
+				Log::slog("LFUCache newNode, freq=%d, prev=%p, next=%p\n", newNode->freq, newNode->hn_prev, newNode->hn_next);
 			}
 
 			if(1 == flag){
 				//New FreqNode adding
-				freqlist_.push_front(nextFreqNode);
+				freqnode_append(&head_, nextFreqNode);
 			}
 
-			lfu_append(nextFreqNode, e);
+			hashnode_append(nextFreqNode, e);
 
-			Log::slog("LFUCache nextFreqNode, freq=%d, prev=%p, next=%p, address=%p\n", nextFreqNode->freq, nextFreqNode->prev, nextFreqNode->next, nextFreqNode);
+			Log::slog("LFUCache nextFreqNode, freq=%d, prev=%p, next=%p, address=%p\n", nextFreqNode->freq, nextFreqNode->hn_prev, nextFreqNode->hn_next, nextFreqNode);
 
 			e->freqNode = nextFreqNode;
 
@@ -287,10 +298,10 @@ public:
 			if(table_.size() > capacity_){
 				Log::slog("LFUCache cache overflow.\n");
 				//Only consider the frequency == 1 HashNode
-				HashNode* cursor = nextFreqNode->next;
+				HashNode* cursor = nextFreqNode->hn_next;
 				if(cursor == NULL)
 					Log::slog("Replace node is NULL\n");
-				lfu_remove(nextFreqNode, cursor);
+				hashnode_remove(nextFreqNode, cursor);
 				table_.remove(cursor->key(), cursor->hash);
 
 				e->cache_id = cursor->cache_id;
@@ -314,7 +325,7 @@ public:
 	void erase(const Slice& key, UINT hash) {
 		HashNode* e = table_.remove(key, hash);
 		if(e != NULL) {
-			lfu_remove(e->freqNode, e);
+			hashnode_remove(e->freqNode, e);
 			lfu_release(e);
 		}
 	}
@@ -328,7 +339,7 @@ private:
 	int capacity_;
 	int last_id;
 	HashTable table_;
-	list<FreqNode*> freqlist_; 
+	FreqNode head_; 
 	int hit_cnt;
 	int set_cnt;
 

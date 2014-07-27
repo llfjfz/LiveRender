@@ -75,6 +75,15 @@
     <ClInclude Include="common_net.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="lfu_cache.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fifo_cache.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="lfu_cache_linked.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="log.cpp">
