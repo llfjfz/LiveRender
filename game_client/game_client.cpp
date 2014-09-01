@@ -88,7 +88,7 @@ int main(int argc, char** argv) {
 	cc.send_raw_buffer(string(argv[1]));
 
 
-	// initial the section
+	// initial the input section
 	InitializeCriticalSection(&main_section);
 	p_main_section = &main_section;
 	// begin the input thread
