@@ -33,6 +33,9 @@ public:
 	float mesh_ratio_;
 
 	int ban_ib_;
+
+	//Init server cache capacity
+	int cache_capacity;
 };
 
 class ClientConfig : public Config {

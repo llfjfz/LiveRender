@@ -1,7 +1,10 @@
 #ifndef __COMMAND_SERVER__
 #define __COMMAND_SERVER__
 #include "command_recorder.h"
-#include "cache.hpp"
+//#include "cache.hpp"
+//#include "lfu_cache.hpp"
+#include "fifo_cache.hpp"
+//#include "lfu_cache_linked.hpp"
 
 class CommandServer : public Network, public Buffer {
 public:
@@ -42,7 +45,9 @@ private:
 
 	CommandRecorder* cr_;
 	
-	Cache* cache_mgr_;
+//	Cache* cache_mgr_;
+//	LFUCache* cache_mgr_;
+	FIFOCache* cache_mgr_;
 };
 
 #endif

@@ -148,7 +148,7 @@ void CommandRecorder::add_record(int op_code, int len) {
 	}
 }
 
-void CommandRecorder::add_lengh(int length) {
+void CommandRecorder::add_length(int length) {
 	total_len += length;
 }
 

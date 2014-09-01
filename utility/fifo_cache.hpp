@@ -107,27 +107,27 @@ private:
 	HashNode** list_;
 };
 
-class Cache {
+class FIFOCache {
 public:
-	Cache(): last_id(0), capacity_(30000) {
+	FIFOCache(): last_id(0), capacity_(30000) {
 		hit_cnt = 0;
 		set_cnt = 0;
-		lru_.next = &lru_;
-		lru_.prev = &lru_;
+		fifo_.next = &fifo_;
+		fifo_.prev = &fifo_;
 	}
 
-	Cache(int capacity): last_id(0){
+	FIFOCache(int capacity): last_id(0) {
 		capacity_ = capacity;
 		hit_cnt = 0;
 		set_cnt = 0;
-		lru_.next = &lru_;
-		lru_.prev = &lru_;
+		fifo_.next = &fifo_;
+		fifo_.prev = &fifo_;
 	}
-	
-	~Cache() {
-		for(HashNode*e=lru_.next; e!=&lru_; ) {
+
+	~FIFOCache() {
+		for(HashNode*e=fifo_.next; e!=&fifo_; ) {
 			HashNode* next = e->next;
-			lru_release(e);
+			fifo_release(e);
 			e = next;
 		}
 	}
@@ -139,30 +139,30 @@ public:
 	void set_capacity(int capacity) { capacity_ = capacity; }
 	int get_capacity() const { return capacity_; }
 
-	void lru_release(HashNode* e) {
+	void fifo_release(HashNode* e) {
 		free(e);
 	}
 
-	void lru_remove(HashNode* e) {
+	void fifo_remove(HashNode* e) {
 		e->next->prev = e->prev;
 		e->prev->next = e->next;
 	}
 
-	void lru_append(HashNode* e) {
-		e->next = &lru_;
-		e->prev = lru_.prev;
+	void fifo_append(HashNode* e) {
+		e->next = &fifo_;
+		e->prev = fifo_.prev;
 		e->prev->next = e;
 		e->next->prev = e;
 	}
 
-	HashNode* look_up(const Slice& key) {
-		HashNode* e = table_.look_up(key, hash_slice(key));
-		if(e != NULL) {
-			lru_remove(e);
-			lru_append(e);
-		}
-		return e;
+	void fifo_replace(HashNode *e, HashNode *old){
+		e->prev = old->prev;
+		e->next = old->next;
+		old->prev->next = e;
+		old->next->prev = e;
 	}
+
+	
 
 	HashNode* insert(const Slice& key, int& hit_id, int& rep_id) {
 		HashNode* e = reinterpret_cast<HashNode*>(malloc(sizeof(HashNode) - 1 + key.size()));
@@ -170,37 +170,36 @@ public:
 		e->hash = hash_slice(key);
 		memcpy(e->key_data, key.data(), key.size());
 
-		lru_append(e);
 		HashNode* old = table_.insert(e);
 
 		if(old != NULL) {
-			//命中缓存
+			//Cache hit
 			e->cache_id = old->cache_id;
 
 			hit_id = e->cache_id;
 			rep_id = -1;
 
-			lru_remove(old);
-			lru_release(old);
-
+			fifo_replace(e, old);
+			fifo_release(old);
 			//update hit ratio
 			hit_cnt++;
 		}
 		else {
-			//没有命中缓存
+			//Cache miss
 			hit_id = -1;
-
+	
+			fifo_append(e);
 			//如果当前的缓存数量超过capacity，把lru_后面的那个缓存单元淘汰掉
 			if(table_.size() > capacity_) {
-				HashNode* cursor = lru_.next;
-				lru_remove(cursor);
+				HashNode* cursor = fifo_.next;
+				fifo_remove(cursor);
 				table_.remove(cursor->key(), cursor->hash);
 
 				e->cache_id = cursor->cache_id;
-				lru_release(cursor);
+				fifo_release(cursor);
 			}
 			else {
-				e->cache_id = last_id++;  //TODO 会无限增长?
+				e->cache_id = last_id++;  //TODO unlimited increase
 			}
 
 			rep_id = e->cache_id;
@@ -215,13 +214,13 @@ public:
 	void erase(const Slice& key, UINT hash) {
 		HashNode* e = table_.remove(key, hash);
 		if(e != NULL) {
-			lru_remove(e);
-			lru_release(e);
+			fifo_remove(e);
+			fifo_release(e);
 		}
 	}
 private:
 	int capacity_;
-	HashNode lru_;
+	HashNode fifo_;
 	HashTable table_;
 	int last_id;
 

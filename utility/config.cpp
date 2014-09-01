@@ -83,6 +83,8 @@ void ServerConfig::load_config() {
 	read_property("mesh_decimate", "ratio", mesh_ratio_);
 
 	read_property("mesh_decimate", "ban", ban_ib_);
+
+	read_property("cache_capacity", "capacity", cache_capacity);
 	
 }
 

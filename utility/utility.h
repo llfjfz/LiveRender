@@ -30,7 +30,7 @@ using namespace std;
 
 #define USE_CLIENT_INPUT
 
-#define ENABLE_LOG
+//#define ENABLE_LOG
 #define ENABLE_NETWORK_COMPRESS
 #define ENABLE_SERVER_RENDERING
 

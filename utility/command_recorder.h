@@ -11,7 +11,7 @@ class CommandRecorder {
 public:
 	CommandRecorder();
 	void add_record(int op_code, int length);
-	void add_lengh(int length);
+	void add_length(int length);
 	void print_info();
 
 	void cache_hit(int op_code);

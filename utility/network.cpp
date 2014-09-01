@@ -22,6 +22,7 @@ void Network::set_cache_filter() {
 	cache_filter[SetVertexShader_Opcode] = 1;
 	cache_filter[SetSamplerState_Opcode] = 1;
 	cache_filter[SetViewport_Opcode] = 1;
+
 }
 
 int Network::send_packet(Buffer* buffer) {

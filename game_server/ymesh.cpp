@@ -1023,6 +1023,48 @@ void YMesh::log_meshes(char* fname) {
 		mesh_list[i]->stat(f);
 	}
 
+	//Statics mesh update count and data bytes
+	const int statics_upper = 12;
+	int statics_update_count[statics_upper]={0};
+	int updatecount=0;
+
+	long long statics_data_bytes[statics_upper]={0};
+	long long databytes = 0;
+	for(int i=0; i<mesh_list.size(); ++i){
+		updatecount = mesh_list[i]->update_count_;
+		databytes = mesh_list[i]->data_bytes_;
+		if(updatecount>10){
+			statics_update_count[statics_upper - 1]++;
+			statics_data_bytes[statics_upper - 1] += databytes;
+		}
+		else{
+			statics_update_count[updatecount]++;
+			statics_data_bytes[updatecount] += databytes;
+		}
+	}
+	long long frequent_databytes = 0;
+	long long unfrequent_databytes = 0;
+	int frequent_updatecount = 0;
+	int unfrequent_updatecount = 0;
+	const int frequency_threshold = 10;
+	for(int i=0; i<frequency_threshold; i++){
+		unfrequent_databytes += statics_data_bytes[i];
+		unfrequent_updatecount += statics_update_count[i];
+	}
+	for(int i = statics_upper-1; i >= frequency_threshold; i--){
+		frequent_databytes += statics_data_bytes[i];
+		frequent_updatecount += statics_update_count[i];
+	}
+	for(int i=0; i<statics_upper; i++)
+		fprintf(f, "update_count_ %d: %d\n", i, statics_update_count[i]);
+
+	fprintf(f, "unfrequent_updatecount: %d\n", unfrequent_updatecount);
+	fprintf(f, "frequent_updatecount: %d\n", frequent_updatecount);
+	fprintf(f, "Frequent update count proportion of total: %f\n", 1.0*frequent_updatecount/(unfrequent_updatecount + frequent_updatecount));
+	fprintf(f, "unfrequent_databytes: %ld\n", unfrequent_databytes);
+	fprintf(f, "frequent_databytes: %ld\n", frequent_databytes);
+	fprintf(f, "Frequent data proportion of total: %f\n", 1.0*frequent_databytes/(unfrequent_databytes+frequent_databytes));
+
 	fclose(f);
 	
 }

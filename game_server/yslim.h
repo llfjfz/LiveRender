@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <cstdlib>
+#include <windows.h>
 using namespace std;
 
 
@@ -66,6 +67,7 @@ public:
 
 	int pack_vertex_time_;
 	int decimate_time_;
+
 
 private:
 	int vert_cnt_;
