@@ -51,5 +51,5 @@ Unity Angry Bots: http://unity3d.com/showcase/live-demos#angrybots
 
 About us
 --------
-This project is developed by Huazhong University of Science and Technology, Service Computing Technology and System Lab. Our lab website is http://grid.hust.edu.cn/. 
+This project is developed by Huazhong University of Science and Technology, Service Computing Technology and System Lab, and Cluster and Grid Computing Lab. Our lab website is http://grid.hust.edu.cn/. 
 For more details, you can find them in "Li Lin, Xiaofei Liao, Guang Tan, Hai Jin, Xiaobin Yang, Wei Zhang, Bo Li. LiveRender: A Cloud Gaming System Based on Compressed Graphics Streaming. In Proc. of the 22nd ACM International Conference on Multimedia(MM'14), ACM, 2014: 347-356."
