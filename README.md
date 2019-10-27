@@ -34,7 +34,7 @@ You can start with our pre-compiled exe files for Windows x86(with Visual Studio
 ### Server Side
 Copy files: "game_server.conf", "game_server.dll", "loader.exe" and "SDL2.dll" from "Release" directory to the game directory. Make sure these files are standing in the same directory of the game exe file. Run the "loader.exe".
 ### Client Side
-Copy files: "game_client.conf", "game_client.exe", "SDL2.dll" to a folder. Configurate "game_client.conf", set ip address to the server's ip. Then shit + right mouse-clicking, choose "Open a command window here". Use commands: game_client game_name, here game_name refers to the game(name of game exe) you want to start in the server side. For example, game_client trine.
+Copy files: "game_client.conf", "game_client.exe", "SDL2.dll" to a folder. Configurate "game_client.conf", set ip address to the server's ip. Then shift + right mouse-clicking, choose "Open a command window here". Use commands: game_client game_name, here game_name refers to the game(name of game exe) you want to start in the server side. For example, game_client trine.
 
 Game test cases
 ---------------
